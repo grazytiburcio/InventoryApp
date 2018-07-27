@@ -79,14 +79,14 @@ public final class BookContract {
         /**
          * Quantity of the book.
          * <p>
-         * Type: DOUBLE
+         * Type: INTEGER
          */
         public final static String COLUMN_QUANTITY = "quantity";
 
         /**
          * Price of the book.
          * <p>
-         * Type: INTEGER
+         * Type: DOUBLE
          */
         public final static String COLUMN_PRICE = "price";
 

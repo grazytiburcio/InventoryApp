@@ -150,16 +150,16 @@ public class BookProvider extends ContentProvider {
             throw new IllegalArgumentException("Book requires a name");
         }
 
-        // If the quantity is provided, check that it's greater than or equal to 0
+        // Check that the quantity is not null
         Integer quantity = values.getAsInteger(BookEntry.COLUMN_QUANTITY);
-        if (quantity != null && quantity < 0) {
-            throw new IllegalArgumentException("Book requires valid quantity");
+        if (quantity == null) {
+            throw new IllegalArgumentException("Book requires a quantity");
         }
 
-        // If the price is provided, check that it's greater than or equal to 0
+        // Check that the price is not null
         Double price = values.getAsDouble(BookEntry.COLUMN_PRICE);
-        if (price != null && price < 0) {
-            throw new IllegalArgumentException("Book requires valid price");
+        if (price == null) {
+            throw new IllegalArgumentException("Book requires a price");
         }
 
         // Check that the supplier name is not null
@@ -232,22 +232,20 @@ public class BookProvider extends ContentProvider {
         }
 
         // If the {@link BookEntry#COLUMN_QUANTITY} key is present,
-        // check that the quantity value is valid.
+        // check that the quantity value is not null.
         if (values.containsKey(BookEntry.COLUMN_QUANTITY)) {
-            // Check that the quantity is greater than or equal to 0
             Integer quantity = values.getAsInteger(BookEntry.COLUMN_QUANTITY);
-            if (quantity != null && quantity < 0) {
-                throw new IllegalArgumentException("Book requires valid quantity");
+            if (quantity == null) {
+                throw new IllegalArgumentException("Book requires a quantity");
             }
         }
 
         // If the {@link BookEntry#COLUMN_PRICE} key is present,
-        // check that the price value is valid.
+        // check that the price value is not null.
         if (values.containsKey(BookEntry.COLUMN_PRICE)) {
-            // Check that the price is greater than or equal to 0
-            Integer price = values.getAsInteger(BookEntry.COLUMN_PRICE);
-            if (price != null && price < 0) {
-                throw new IllegalArgumentException("Book requires valid price");
+            Double price = values.getAsDouble(BookEntry.COLUMN_PRICE);
+            if (price == null) {
+                throw new IllegalArgumentException("Book requires a price");
             }
         }
 

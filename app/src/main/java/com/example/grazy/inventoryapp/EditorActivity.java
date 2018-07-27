@@ -211,23 +211,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // and book attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(BookEntry.COLUMN_PRODUCT_NAME, productNameString);
-
-        // If the quantity is not provided by the user, don't try to parse the string into an
-        // integer value. Use 0 by default.
-        int quantity = 0;
-        if (!TextUtils.isEmpty(quantityString)) {
-            quantity = Integer.parseInt(quantityString);
-        }
-        values.put(BookEntry.COLUMN_QUANTITY, quantity);
-
-        // If the price is not provided by the user, don't try to parse the string into an
-        // integer value. Use 0 by default.
-        double price = 0;
-        if (!TextUtils.isEmpty(priceString)) {
-            price = Double.parseDouble(priceString);
-        }
-        values.put(BookEntry.COLUMN_PRICE, price);
-
+        values.put(BookEntry.COLUMN_QUANTITY, quantityString);
+        values.put(BookEntry.COLUMN_PRICE, priceString);
         values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierNameString);
         values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumberString);
 
@@ -270,13 +255,19 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private boolean validation() {
 
         String productNameString = mProductNameEditText.getText().toString().trim();
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        String priceString = mPriceEditText.getText().toString().trim();
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
         String supplierPhoneNumberString = mSupplierPhoneNumberEditText.getText().toString().trim();
 
-        // No need to validate the quantityString and priceString because is 0 by default if no value is provided
-
         if (TextUtils.isEmpty(productNameString)) {
             Toast.makeText(this, "Please add a Product Name", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(quantityString)) {
+            Toast.makeText(this, "Please add a Quantity", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(priceString)) {
+            Toast.makeText(this, "Please add a Price", Toast.LENGTH_SHORT).show();
             return false;
         } else if (TextUtils.isEmpty(supplierNameString)) {
             Toast.makeText(this, "Please add a Supplier Name", Toast.LENGTH_SHORT).show();
@@ -443,8 +434,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public void onLoaderReset(Loader<Cursor> loader) {
         // If the loader is invalidated, clear out all the data from the input fields.
         mProductNameEditText.setText("");
-        mQuantityEditText.setText(String.valueOf(0));
-        mPriceEditText.setText(String.valueOf(0));
+        mQuantityEditText.setText("");
+        mPriceEditText.setText("");
         mSupplierNameEditText.setText("");
         mSupplierPhoneNumberEditText.setText("");
     }
