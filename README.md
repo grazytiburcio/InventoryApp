@@ -1,4 +1,4 @@
-# InventoryAppStage1
+# InventoryAppStage 2
 Inventory App made with Udacity. This project is part of Android Basics by Google - Nanodegree Program.
 
 Create the structure of a Inventory App that will allow a store to keep track of its inventory of products. 
